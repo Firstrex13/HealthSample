@@ -2,26 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CurrentHealthViewSliderSmooth : MonoBehaviour
+public class HealthViewSliderSmooth : HealthViewBasic
 {
-    [SerializeField] private Health _health;
     [SerializeField] private Slider _slider;
     [SerializeField] private Gradient _gradient;
     [SerializeField] private Image _fillColor;
 
-    private void OnEnable()
-    {
-        _health.Hit += UpdateValue;
-        _health.Healed += UpdateValue;
-    }
-
-    private void OnDisable()
-    {
-        _health.Hit -= UpdateValue;
-        _health.Healed -= UpdateValue;
-    }
-
-    private void UpdateValue()
+    public override void UpdateValue()
     {
         StartCoroutine(nameof(ChangeValue));
     }
@@ -35,7 +22,7 @@ public class CurrentHealthViewSliderSmooth : MonoBehaviour
         {
             time += Time.deltaTime;
 
-            float currentValue = _health.CurrentHealth / _health.MaxValue;
+            float currentValue = Health.CurrentHealth / Health.MaxValue;
 
             _slider.value = Mathf.MoveTowards(_slider.value, currentValue, Time.deltaTime);
 

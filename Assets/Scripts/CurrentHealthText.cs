@@ -1,33 +1,19 @@
 using TMPro;
 using UnityEngine;
 
-public class CurrentHealthTextView : MonoBehaviour
+public class HealthTextView : HealthViewBasic
 {
-    [SerializeField] private Health _health;
     [SerializeField] private TextMeshProUGUI _currentHealthText;
     [SerializeField] private TextMeshProUGUI _maxHealth;
 
-
-    private void OnEnable()
-    {
-        _health.Hit += UpdateText;
-        _health.Healed += UpdateText;
-    }
-
-    private void OnDisable()
-    {
-        _health.Hit -= UpdateText;
-        _health.Healed -= UpdateText;
-    }
-
     private void Start()
     {
-        _maxHealth.text = _health.MaxValue.ToString();
-        _currentHealthText.text = _health.MaxValue.ToString();
+        _maxHealth.text = Health.MaxValue.ToString();
+        _currentHealthText.text = Health.MaxValue.ToString();
     }
 
-    private void UpdateText()
+    public override void UpdateValue()
     {
-        _currentHealthText.text = _health.CurrentHealth.ToString();
+        _currentHealthText.text = Health.CurrentHealth.ToString();
     }
 }
