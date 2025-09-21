@@ -4,7 +4,7 @@ public class HealthViewBasic : MonoBehaviour
 {
     [SerializeField] private Health _health;
 
-    public Health Health => _health;
+    protected Health Health => _health;
 
     private void OnEnable()
     {
